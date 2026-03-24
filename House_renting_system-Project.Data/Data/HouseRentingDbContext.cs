@@ -18,5 +18,25 @@ namespace House_renting_system_Project.Data.Data
         public DbSet<House> Houses { get; init; } = null!;
         public DbSet<Category> Categories { get; init; } = null!;
         public DbSet<Agent> Agents { get; init; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder
+                .Entity<House>()
+                .HasOne(h => h.Category)
+                .WithMany(c => c.Houses)
+                .HasForeignKey(h => h.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<House>()
+                .HasOne(h => h.Agent)
+                .WithMany(a => a.ManagedHouses)
+                .HasForeignKey(h => h.AgentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(builder);
+        }
+    
     }
 }
