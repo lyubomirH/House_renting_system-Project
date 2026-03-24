@@ -49,6 +49,11 @@ namespace House_renting_system_Project.Data.Data
                 .HasForeignKey(h => h.AgentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            SeedUsers();
+            SeedAgent();
+            SeedCategories();
+            SeedHouses();
+
             base.OnModelCreating(builder);
         }
 
