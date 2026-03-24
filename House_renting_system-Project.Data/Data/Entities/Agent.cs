@@ -11,7 +11,8 @@ namespace House_renting_system_Project.Data.Data.Entities
 {
     public class Agent
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        [Key]
+        public int Id { get; set; }
         [MaxLength(PhoneNumberMaxLength)]
         [Required]
         public string PhoneNumber { get; set; } = null!;
