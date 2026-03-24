@@ -1,12 +1,7 @@
-﻿using House_renting_system_Project.Data.Data.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using House_renting_system_Project.Data.Configurations;
+using House_renting_system_Project.Data.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using static House_renting_system_Project.Data.Configurations.DataSeeds;
 namespace House_renting_system_Project.Data.Data
 {
     public class HouseRentingDbContext : IdentityDbContext
@@ -24,24 +19,9 @@ namespace House_renting_system_Project.Data.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder
-                .Entity<House>()
-                .HasOne(h => h.Category)
-                .WithMany(c => c.Houses)
-                .HasForeignKey(h => h.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<House>()
-                .HasOne(h => h.Agent)
-                .WithMany(a => a.ManagedHouses)
-                .HasForeignKey(h => h.AgentId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            SeedUsers();
-            SeedAgent();
-            SeedCategories();
-            SeedHouses();
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new AgentConfiguration());
+            builder.ApplyConfiguration(new HouseConfiguration());
 
             base.OnModelCreating(builder);
         }
