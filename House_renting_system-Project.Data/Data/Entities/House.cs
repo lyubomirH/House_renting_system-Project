@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using static House_renting_system_Project.Data.Data.Entities.DataConstants
+using static House_renting_system_Project.Data.Data.DataConstants.House;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Security.Principal;
 using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace House_renting_system_Project.Data.Data.Entities
 {
@@ -17,17 +18,17 @@ namespace House_renting_system_Project.Data.Data.Entities
         [Key]
         public int Id { get; init; }
 
-        [MaxLength(50)]
+        [MaxLength(TitleMaxLength)]
         [MinLength(10)]
         [Required]
         public string Title { get; set; } = null!;
 
-        [MaxLength(150)]
+        [MaxLength(AddressMaxLength)]
         [MinLength(30)]
         [Required]
         public string Address { get; set; } = null!;
 
-        [MaxLength(500)]
+        [MaxLength(DescriptionMaxLength)]
         [MinLength(50)]
         [Required]
         public string Description { get; set; } = null!;
@@ -37,6 +38,7 @@ namespace House_renting_system_Project.Data.Data.Entities
 
         [MaxLength(2000)]
         [Required]
+        [Column(TypeName = "decimal(12, 3)")]
         public decimal PricePerMonth { get; set; }
 
         public int CategoryId { get; set; }
@@ -46,6 +48,7 @@ namespace House_renting_system_Project.Data.Data.Entities
         public Agent Agent { get; set; }
         public string? RenterId { get; set; }
         public IdentityUser? Renter { get; set; }
+        
 
 
     }
