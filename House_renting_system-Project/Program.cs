@@ -12,7 +12,7 @@ namespace House_renting_system_Project
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services.AddDbContext<HouseRentingDbContext>(opt => opt.UseSqlServer(connectionString));
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
