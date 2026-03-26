@@ -1,3 +1,5 @@
+using House_renting_system_Project.Data.Data;
+
 namespace House_renting_system_Project
 {
     public class Program
@@ -7,6 +9,7 @@ namespace House_renting_system_Project
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<HouseRentingDbContext>(opt => opt.);
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

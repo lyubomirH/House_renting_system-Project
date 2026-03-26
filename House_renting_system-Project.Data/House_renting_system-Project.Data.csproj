@@ -17,8 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\House_renting_system-Project\House_renting_system-Project.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace House_renting_system_Project.Data.Data
 {
-    public class HouseRentingDbContext : IdentityDbContext
+    public class HouseRentingDbContext : IdentityDbContext<ApplicationUser>
     {
 
         public HouseRentingDbContext
@@ -17,10 +17,6 @@ namespace House_renting_system_Project.Data.Data
         public DbSet<Category> Categories { get; init; } = null!;
         public DbSet<Agent> Agents { get; init; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(Configuration.ConnectionString);
-        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new CategoryConfiguration());
