@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +17,7 @@ namespace House_renting_system_Project.Data.Data.Entities
         public string PhoneNumber { get; set; } = null!;
         [Required]
         public string UserId { get; set; } = null!;
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
         public IEnumerable<House> ManagedHouses { get; set; } = new List<House>();
     }
 }

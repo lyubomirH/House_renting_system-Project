@@ -17,19 +17,19 @@ namespace House_renting_system_Project.Data.Configurations
         {
             return new Agent[]
             {
-                new Agent()
-                {
-                Id = 1,
-                PhoneNumber = "+359888888888",
-                UserId = "ebwfdwefw"
-                },
+            //    new Agent()
+            //    {
+            //    Id = 1,
+            //    PhoneNumber = "+359888888888",
+            //    UserId = "ebwfdwefw"
+            //    },
 
-            new Agent()
-                {
-                    Id = 2,
-                    PhoneNumber = "+359988888888",
-                    UserId = "ewuhrwhfewfver"
-                }
+            //new Agent()
+            //    {
+            //        Id = 2,
+            //        PhoneNumber = "+359988888888",
+            //        UserId = "ewuhrwhfewfver"
+            //    }
             };
         }
     }

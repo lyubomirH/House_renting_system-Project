@@ -47,7 +47,7 @@ namespace House_renting_system_Project.Data.Data.Entities
         public int AgentId { get; set; }
         public Agent Agent { get; set; }
         public string? RenterId { get; set; }
-        public IdentityUser? Renter { get; set; }
+        public ApplicationUser? Renter { get; set; }
         
 
 

@@ -18,23 +18,23 @@ namespace House_renting_system_Project.Data.Configurations
         {
             return new Category[]
             {
-                new Category()
-                {
-                    Id = 1,
-                    Name = "Cottage"
-                },
+                //new Category()
+                //{
+                //    Id = 1,
+                //    Name = "Cottage"
+                //},
 
-                new Category()
-                {
-                    Id = 2,
-                    Name = "Single-Family"
-                },
+                //new Category()
+                //{
+                //    Id = 2,
+                //    Name = "Single-Family"
+                //},
 
-                new Category()
-                {
-                    Id = 3,
-                    Name = "Duplex"
-                }
+                //new Category()
+                //{
+                //    Id = 3,
+                //    Name = "Duplex"
+                //}
             };
         }
     }
