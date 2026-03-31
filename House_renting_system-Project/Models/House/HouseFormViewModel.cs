@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace House_renting_system_Project.Models
+namespace House_renting_system_Project.Models.House
 {
     public class HouseFormViewModel
     {
