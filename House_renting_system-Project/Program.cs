@@ -16,7 +16,19 @@ namespace House_renting_system_Project
 
             builder.Services.AddDbContext<HouseRentingDbContext>(opt => opt.UseSqlServer(connectionString));
             
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+                opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredLength = 6;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.SignIn.RequireConfirmedEmail = false;
+            }
+            )
                 .AddEntityFrameworkStores<HouseRentingDbContext>()
                 .AddDefaultTokenProviders();
 
