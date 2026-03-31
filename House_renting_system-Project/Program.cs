@@ -15,6 +15,7 @@ namespace House_renting_system_Project
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services.AddDbContext<HouseRentingDbContext>(opt => opt.UseSqlServer(connectionString));
+            
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<HouseRentingDbContext>()
                 .AddDefaultTokenProviders();
