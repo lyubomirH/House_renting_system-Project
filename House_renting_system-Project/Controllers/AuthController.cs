@@ -72,9 +72,9 @@ namespace House_renting_system_Project.Controllers
             {
                 return RedirectToAction(nameof(Login));
             }
-            foreach(var item in result.Errors)
+            foreach(var error in result.Errors)
             {
-                ModelState.AddModelError(String.Empty, item.Description);
+                ModelState.AddModelError(string.Empty, error.Description);
             }
             return View(model);
         }
