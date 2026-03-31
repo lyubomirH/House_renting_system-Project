@@ -55,7 +55,7 @@ namespace House_renting_system_Project.Controllers
             {
                 return View(model);
             }
-            var user = userManager.FindByEmailAsync(model.Email);
+            var user = await userManager.FindByEmailAsync(model.Email);
             if (user != null)
             {
                 return View(model);
