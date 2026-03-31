@@ -33,6 +33,29 @@ namespace House_renting_system_Project.Controllers
                 //ModelState.AddModelError();
                 return View(model);
             }
+
+            var result = await userManager.CheckPasswordAsync(user, model.Password);
+            if (result == true) 
+            { 
+                await signInManager.SignInAsync(user, model.RememberMe);
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = userManager.FindByEmailAsync(model.Email);
         }
     }
 }
