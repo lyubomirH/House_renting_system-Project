@@ -56,6 +56,23 @@ namespace House_renting_system_Project.Controllers
                 return View(model);
             }
             var user = userManager.FindByEmailAsync(model.Email);
+            if (user != null)
+            {
+                return View(model);
+            }
+
+            var newUser = new ApplicationUser() 
+            { 
+                Email = model.Email,
+                UserName = model.Username
+            };
+
+            var result = await userManager.CreateAsync(newUser, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+            return View(model);
         }
     }
 }
