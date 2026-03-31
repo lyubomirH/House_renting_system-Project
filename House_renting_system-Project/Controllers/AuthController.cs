@@ -21,13 +21,18 @@ namespace House_renting_system_Project.Controllers
             return View(); 
         }
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            return View();
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                //ModelState.AddModelError();
+                return View(model);
+            }
         }
     }
 }
