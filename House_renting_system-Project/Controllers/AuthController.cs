@@ -58,6 +58,7 @@ namespace House_renting_system_Project.Controllers
             var user = await userManager.FindByEmailAsync(model.Email);
             if (user != null)
             {
+                ModelState.AddModelError("", "User already exists");
                 return View(model);
             }
 
