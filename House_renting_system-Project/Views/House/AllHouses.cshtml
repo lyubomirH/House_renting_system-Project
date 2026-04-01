@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HouseViewModel>
+﻿@model IEnumerable<HousesViewModel>
 
 @{
     ViewBag.Title = "All Houses";
@@ -21,3 +21,8 @@
         </a>
     }
 </div>
+<footer class="border-top footer text-muted">
+    <div class="container">
+        <a class="btn btn-primary" role="button" asp-controller="House" asp-action="CreateHouse">Register house</a>
+    </div>
+</footer>
