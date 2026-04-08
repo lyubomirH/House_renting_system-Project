@@ -53,13 +53,14 @@
                         </div>
 
                         <!-- Category -->
-                        @* <div class="mb-3">
-                            <label asp-for="CategoryId" class="form-label"></label>
-                            <select asp-for="CategoryId" asp-items="@Model.Categories" class="form-select">
-                                <option value="">-- Select Category --</option>
-                            </select>
-                            <span asp-validation-for="CategoryId" class="text-danger"></span>
-                        </div> *@
+                         <div class="mb-3">
+                            <select asp-for="Category" class="form-label">
+                                @foreach (var options in Model.Categories)
+                                {
+                                    <option value="@options">@options</option>
+                                }
+                            </select> 
+                        </div> 
 
                         <!-- Agent -->
                         @* <div class="mb-3">
