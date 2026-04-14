@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Security.Claims;
 
 namespace House_renting_system_Project.Controllers
 {
@@ -73,6 +74,7 @@ namespace House_renting_system_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateHouse(HouseFormViewModel model)
         {
+            var userId = User.FindFirstValue("id");
             if (!ModelState.IsValid)
             {
                 return View(model);
