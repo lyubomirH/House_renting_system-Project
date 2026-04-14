@@ -56,9 +56,9 @@ namespace House_renting_system_Project.Controllers
         [Authorize]
         public async Task<IActionResult> CreateHouse()
         {
-            var houseCategories = await context.Categories
+            List<Category> houseCategories = await context.Categories
             .AsNoTracking()
-            .Select(c => c.Name)
+            .Select(c => c)
             .ToListAsync();
             var listOfCategories = new HouseFormViewModel
             {
