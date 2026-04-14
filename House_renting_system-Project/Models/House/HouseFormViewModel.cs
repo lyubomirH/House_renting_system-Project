@@ -1,4 +1,5 @@
 ﻿using House_renting_system_Project.Data.Data.Entities;
+using House_renting_system_Project.Models.House.Helpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
@@ -28,9 +29,8 @@ namespace House_renting_system_Project.Models.House
         public decimal PricePerMonth { get; set; }
 
         [Required(ErrorMessage = "Category is required")]
-        public List<Category> Categories { get; set; }  // to be repleced string => class!!
-        [Required(ErrorMessage = "A categoty is reqiored")]
-        public Category Category { get; set; }
+        public List<CategoryViewModel> Categories { get; set; }  // to be repleced string => class!!
+
 
 
         //[Required(ErrorMessage = "Agent is required")]

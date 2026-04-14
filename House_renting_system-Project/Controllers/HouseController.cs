@@ -1,6 +1,7 @@
 ﻿using House_renting_system_Project.Data.Data;
 using House_renting_system_Project.Data.Data.Entities;
 using House_renting_system_Project.Models.House;
+using House_renting_system_Project.Models.House.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -56,16 +57,15 @@ namespace House_renting_system_Project.Controllers
         [Authorize]
         public async Task<IActionResult> CreateHouse()
         {
-            List<Category> houseCategories = await context.Categories
+            List<CategoryViewModel> houseCategories = await context.Categories
             .AsNoTracking()
-            .Select(c => c)
-            .ToListAsync();
-            var listOfCategories = new HouseFormViewModel
+            .Select(c => new CategoryViewModel
             {
-                Categories = houseCategories
-            };
-
-            return View(listOfCategories);
+                Id = c.Id,
+                Name = c.Name,
+            })
+            .ToListAsync();
+            return View(houseCategories );
         }
 
         [HttpPost]
@@ -93,7 +93,11 @@ namespace House_renting_system_Project.Controllers
                 Description = model.Description,
                 ImageUrl = model.ImageUrl,
                 PricePerMonth = model.PricePerMonth,
-                Category = model.Category,
+                Category = new Category 
+                {
+                    Id = model.Categories[].Id,
+                    Id = model.Categories[].Name
+                },
                 //AgentId = 0
             };
 
