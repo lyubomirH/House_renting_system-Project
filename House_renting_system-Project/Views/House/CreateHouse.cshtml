@@ -54,7 +54,7 @@
 
                         <!-- Category -->
                          <div class="mb-3">
-                            <select asp-for="Categories" class="form-label">
+                            <select asp-for="SelectedCategoryId" class="form-label">
                                 @foreach (var product in Model.Categories)
                                 {
                                     <option value="@product.Id">@product.Name</option>

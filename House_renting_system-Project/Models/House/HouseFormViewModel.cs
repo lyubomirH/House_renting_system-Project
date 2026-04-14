@@ -30,6 +30,7 @@ namespace House_renting_system_Project.Models.House
 
         [Required(ErrorMessage = "Category is required")]
         public List<CategoryViewModel> Categories { get; set; }  // to be repleced string => class!!
+        public int SelectedCategoryId { get; set; } 
 
 
 

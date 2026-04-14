@@ -69,6 +69,7 @@ namespace House_renting_system_Project.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateHouse(HouseFormViewModel model)
         {
@@ -93,11 +94,7 @@ namespace House_renting_system_Project.Controllers
                 Description = model.Description,
                 ImageUrl = model.ImageUrl,
                 PricePerMonth = model.PricePerMonth,
-                Category = new Category 
-                {
-                    Id = model.Categories[].Id,
-                    Id = model.Categories[].Name
-                },
+                CategoryId = model.SelectedCategoryId,
                 //AgentId = 0
             };
 
