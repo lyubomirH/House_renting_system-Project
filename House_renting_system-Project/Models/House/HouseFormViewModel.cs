@@ -29,7 +29,7 @@ namespace House_renting_system_Project.Models.House
         public decimal PricePerMonth { get; set; }
 
         [Required(ErrorMessage = "Category is required")]
-        public List<CategoryViewModel> Categories { get; set; }  // to be repleced string => class!!
+        public List<CategoryViewModel>? Categories { get; set; }  // to be repleced string => class!!
         public int SelectedCategoryId { get; set; } 
 
 

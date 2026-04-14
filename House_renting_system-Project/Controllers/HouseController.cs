@@ -74,8 +74,20 @@ namespace House_renting_system_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateHouse(HouseFormViewModel model)
         {
+
+            var houseCategories = await context.Categories
+                .AsNoTracking()
+                .Select(c => new CategoryViewModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                })
+                .ToListAsync();
+
             if (!ModelState.IsValid)
             {
+                
+                model.Categories = houseCategories;
                 return View(model);
             }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -104,6 +116,26 @@ namespace House_renting_system_Project.Controllers
             await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(AllHouses));
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> MyHouses()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var houses = context.Houses
+                .Where(h => h.AgentId == userId)
+                .Select(h => new HousesViewModel
+                {
+                    Address = h.Address,
+                    ImageUrl = h.ImageUrl,
+                    Name = h.Title,
+                    Id = h.Id
+                })
+                .ToListAsync();
+
+            return View(nameof(AllHouses), houses);
         }
     }
 }
