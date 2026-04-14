@@ -74,11 +74,11 @@ namespace House_renting_system_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateHouse(HouseFormViewModel model)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             bool addressExists = await context.Houses
                 .AnyAsync(h => h.Address.ToLower() == model.Address.ToLower());
@@ -97,13 +97,13 @@ namespace House_renting_system_Project.Controllers
                 ImageUrl = model.ImageUrl,
                 PricePerMonth = model.PricePerMonth,
                 CategoryId = model.SelectedCategoryId,
-                //AgentId = 0
+                AgentId = userId
             };
 
             context.Houses.Add(newHouse);
             await context.SaveChangesAsync();
 
-            return RedirectToAction("AllHouses");
+            return RedirectToAction(nameof(AllHouses));
         }
     }
 }
