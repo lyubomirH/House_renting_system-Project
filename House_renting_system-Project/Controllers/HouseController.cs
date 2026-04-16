@@ -139,7 +139,8 @@ namespace House_renting_system_Project.Controllers
                     Address = h.Address,
                     ImageUrl = h.ImageUrl,
                     Name = h.Title,
-                    Id = h.Id
+                    Id = h.Id,
+                    CurentUserIsOwner = true
                 })
                 .ToListAsync();
             ViewBag.Title = "My houses";
