@@ -21,6 +21,7 @@ namespace House_renting_system_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> AllHouses()
         {
+            var currentUsersId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var housesViewModel = await context.Houses
             .AsNoTracking()
             .Select(h => new HousesViewModel
@@ -28,9 +29,11 @@ namespace House_renting_system_Project.Controllers
                 Id = h.Id,
                 Name = h.Title,
                 Address = h.Address,
-                ImageUrl = h.ImageUrl
+                ImageUrl = h.ImageUrl,
+                CurentUserIsOwner = h.AgentId == currentUsersId
             })
             .ToListAsync();
+            ViewBag.Title = "All houses";
             return View(housesViewModel);
         }
         [HttpGet]
@@ -58,7 +61,7 @@ namespace House_renting_system_Project.Controllers
         [Authorize]
         public async Task<IActionResult> CreateHouse()
         {
-            List<CategoryViewModel> houseCategories = await context.Categories
+            List<CategoryViewModel> ListOfCategories = await context.Categories
             .AsNoTracking()
             .Select(c => new CategoryViewModel
             {
@@ -66,7 +69,11 @@ namespace House_renting_system_Project.Controllers
                 Name = c.Name,
             })
             .ToListAsync();
-            return View(houseCategories );
+            var houseCategories = new HouseFormViewModel()
+            {
+                Categories = ListOfCategories
+            };
+            return View(houseCategories);
         }
 
         [HttpPost]
@@ -97,6 +104,7 @@ namespace House_renting_system_Project.Controllers
 
             if (addressExists)
             {
+                model.Categories = houseCategories;
                 ModelState.AddModelError("Address", "This address is already registered");
                 return View(model);
             }
@@ -134,7 +142,7 @@ namespace House_renting_system_Project.Controllers
                     Id = h.Id
                 })
                 .ToListAsync();
-
+            ViewBag.Title = "My houses";
             return View(nameof(AllHouses), houses);
         }
     }
