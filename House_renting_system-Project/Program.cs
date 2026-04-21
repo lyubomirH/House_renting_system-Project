@@ -1,5 +1,6 @@
 using House_renting_system_Project.Data.Data;
 using House_renting_system_Project.Data.Data.Entities;
+using House_renting_system_Project.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,6 +63,8 @@ namespace House_renting_system_Project
                 var statusCode = context.Response.StatusCode;
                 Console.WriteLine(statusCode);
             });
+
+            app.UseCustom();
             app.UseAuthentication();
             app.UseAuthorization();
 
