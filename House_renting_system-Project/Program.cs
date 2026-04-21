@@ -52,7 +52,16 @@ namespace House_renting_system_Project
 
             app.UseHttpsRedirection();
             app.UseRouting();
-
+            app.Use(async (context, next) =>
+            {
+                //incoming request
+                var path = context.Request.Path;
+                Console.WriteLine(path);
+                await next();
+                //outgoing respons
+                var statusCode = context.Response.StatusCode;
+                Console.WriteLine(statusCode);
+            });
             app.UseAuthentication();
             app.UseAuthorization();
 
