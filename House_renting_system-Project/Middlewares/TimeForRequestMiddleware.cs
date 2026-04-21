@@ -16,7 +16,7 @@ namespace House_renting_system_Project.Middlewares
             Console.WriteLine("Start");
             await this.next(httpContext);
             stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds);
+            Console.WriteLine($"Milliseconds: {stopwatch.ElapsedMilliseconds}");
         }
     }
 }
