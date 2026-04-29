@@ -1,4 +1,6 @@
-﻿namespace House_renting_system_Project.Models.House
+﻿using House_renting_system_Project.Models.Query;
+
+namespace House_renting_system_Project.Models.House
 {
     public class HousesViewModel
     {
@@ -7,5 +9,7 @@
         public string Address { get; set; }
         public string ImageUrl { get; set; }
         public bool CurentUserIsOwner { get; set; }
+
+        
     }
 }

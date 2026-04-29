@@ -35,20 +35,23 @@ namespace House_renting_system_Project
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                options.LogoutPath = "/Auth/Login";
+                options.LoginPath = "/Auth/Login";
                 options.AccessDeniedPath = "/User/AccessDenied";
             });
 
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
-            app.UseTimer();
-            // Configure the HTTP request pipeline.
+            //app.UseTimer();
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/Home/ServerError");
+                app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
                 app.UseHsts();
+            }
+            else
+            {
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();
@@ -64,11 +67,12 @@ namespace House_renting_system_Project
                 Console.WriteLine(statusCode);
             });
 
-            app.UseCustom();
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapStaticAssets();
+            app.UseStaticFiles();
+
+            //app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")

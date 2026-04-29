@@ -8,6 +8,7 @@ namespace House_renting_system_Project.Models.House
     public class HouseFormViewModel
     {
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Title is required")]
         [StringLength(100, MinimumLength = 10, ErrorMessage = "Title must be between 10 and 100 characters")]
         public string Title { get; set; } = null!;
@@ -28,15 +29,10 @@ namespace House_renting_system_Project.Models.House
         [Range(0, 100000, ErrorMessage = "Price must be between 0 and 100,000")]
         [DataType(DataType.Currency)]
         public decimal PricePerMonth { get; set; }
+        public List<CategoryViewModel>? Categories { get; set; }
 
-        [Required(ErrorMessage = "Category is required")]
-        public List<CategoryViewModel>? Categories { get; set; }  
-        public int SelectedCategoryId { get; set; } 
-
-
-
-        //[Required(ErrorMessage = "Agent is required")]
-        //public int AgentId { get; set; }
-        //public Agent Agent { get; set; }
+        [Required(ErrorMessage = "Please select a category")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a valid category")]
+        public int SelectedCategoryId { get; set; }
     }
 }
