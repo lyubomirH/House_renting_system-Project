@@ -3,6 +3,8 @@ using House_renting_system_Project.Data.Data.Entities;
 using House_renting_system_Project.Models.House;
 using House_renting_system_Project.Models.House.Helpers;
 using House_renting_system_Project.Models.Query;
+using House_renting_system_Project.Servises.Contracts;
+using House_renting_system_Project.Servises.Implementations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +15,13 @@ namespace House_renting_system_Project.Controllers
     public class HouseController : Controller
     {
         private readonly HouseRentingDbContext context;
-        
-        public HouseController(HouseRentingDbContext context)
+        private readonly IHouseService houseService;
+
+        public HouseController(HouseRentingDbContext context,
+            IHouseService houseService)
         {
             this.context = context;
+            this.houseService = houseService;
         }
 
         [HttpGet]
@@ -90,7 +95,7 @@ namespace House_renting_system_Project.Controllers
             var searched = await context.Houses
                 .Include(h => h.Agent)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(h => h.Id == Id && h.IsDeleted == false);
+                .FirstOrDefaultAsync(h => h.Id == Id);
 
             if (searched == null)
             {
@@ -188,39 +193,10 @@ namespace House_renting_system_Project.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var houses = await context.Houses
-                .Where(h => h.AgentId == userId && h.IsDeleted == false)
-                .Select(h => new HousesViewModel
-                {
-                    Address = h.Address,
-                    ImageUrl = h.ImageUrl,
-                    Name = h.Title,
-                    Id = h.Id,
-                    CurentUserIsOwner = true
-                })
-                .ToListAsync();
-
-            var allCategories = await context.Categories
-                .AsNoTracking()
-                .Select(c => new CategoryViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                })
-                .ToListAsync();
-
-            var allHouseViewModel = new AllHouseViewModel
-            {
-                Houses = houses,
-                Query = new QueryViewModel
-                {
-                    AllCategory = allCategories,
-                    IsDecending = false
-                }
-            };
+            var allHouseViewModel = await houseService.GetHousesByUserId(userId);
 
             ViewBag.Title = "My houses";
-            return View("AllHouses", allHouseViewModel);
+            return View(nameof(AllHouses), allHouseViewModel);
         }
 
         [HttpGet]

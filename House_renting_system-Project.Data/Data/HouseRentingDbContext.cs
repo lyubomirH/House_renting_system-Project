@@ -6,7 +6,10 @@ namespace House_renting_system_Project.Data.Data
 {
     public class HouseRentingDbContext : IdentityDbContext<ApplicationUser>
     {
-
+        public HouseRentingDbContext()
+        {
+            
+        }
         public HouseRentingDbContext
             (DbContextOptions<HouseRentingDbContext> options)
             : base(options)
@@ -16,6 +19,7 @@ namespace House_renting_system_Project.Data.Data
         public DbSet<House> Houses { get; init; } = null!;
         public DbSet<Category> Categories { get; init; } = null!;
 
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new CategoryConfiguration());
