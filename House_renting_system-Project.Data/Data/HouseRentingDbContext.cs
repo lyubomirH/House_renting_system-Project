@@ -6,10 +6,6 @@ namespace House_renting_system_Project.Data.Data
 {
     public class HouseRentingDbContext : IdentityDbContext<ApplicationUser>
     {
-        public HouseRentingDbContext()
-        {
-            
-        }
         public HouseRentingDbContext
             (DbContextOptions<HouseRentingDbContext> options)
             : base(options)

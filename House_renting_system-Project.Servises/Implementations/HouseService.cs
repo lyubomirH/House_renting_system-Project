@@ -4,6 +4,7 @@ using House_renting_system_Project.Servises.House;
 using House_renting_system_Project.Servises.House.Helpers;
 using House_renting_system_Project.Servises.Query;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,9 +14,9 @@ namespace House_renting_system_Project.Servises.Implementations
     public class HouseService : IHouseService
     {
         private readonly HouseRentingDbContext context;
-        public HouseService()
+        public HouseService(HouseRentingDbContext context)
         {
-            context = new HouseRentingDbContext();
+            this.context = context;
         }
         public async Task<AllHouseViewModel> GetHousesByUserId(string userId)
         {
