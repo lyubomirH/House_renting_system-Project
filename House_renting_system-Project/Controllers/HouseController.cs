@@ -135,9 +135,7 @@ namespace House_renting_system_Project.Controllers
         [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateHouse(HouseFormViewModel model)
-        {
-            ModelState.Remove("Categories");
-
+        { 
             if (!ModelState.IsValid)
             {
                 var houseCategories = await GetCategoriesAsync();
@@ -258,8 +256,6 @@ namespace House_renting_system_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(HouseFormViewModel model)
         {
-            ModelState.Remove("Categories");
-
             if (!ModelState.IsValid)
             {
                 var houseCategories = await GetCategoriesAsync();

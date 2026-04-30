@@ -32,7 +32,6 @@ namespace House_renting_system_Project.Models.House
         public List<CategoryViewModel>? Categories { get; set; }
 
         [Required(ErrorMessage = "Please select a category")]
-        [Range(1, int.MaxValue, ErrorMessage = "Please select a valid category")]
         public int SelectedCategoryId { get; set; }
     }
 }
