@@ -1,6 +1,6 @@
 using House_renting_system_Project.Data.Data;
 using House_renting_system_Project.Data.Data.Entities;
-using House_renting_system_Project.Models;
+using House_renting_system_Project.Servises;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;

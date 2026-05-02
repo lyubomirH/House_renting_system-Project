@@ -71,9 +71,9 @@ namespace House_renting_system_Project.Controllers
                 model.Categories = houseCategories;
 
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach(var error in errors)
+                foreach (var error in errors)
                 {
-                    //ModelState.AddModelError(errors.,error);
+                    ModelState.AddModelError(string.Empty, error.ErrorMessage);
                 }
                 return View(model);
             }
@@ -149,7 +149,7 @@ namespace House_renting_system_Project.Controllers
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
                 foreach (var error in errors)
                 {
-                    //ModelState.AddModelError(errors, error);
+                    ModelState.AddModelError(string.Empty, error.ErrorMessage);
                 }
 
                 return View(model);
