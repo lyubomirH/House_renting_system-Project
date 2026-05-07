@@ -1,10 +1,8 @@
 using House_renting_system_Project.Data.Data;
 using House_renting_system_Project.Data.Data.Entities;
-using House_renting_system_Project.Middlewares;
 using House_renting_system_Project.Servises.Contracts;
 using House_renting_system_Project.Servises.Implementations;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebSockets;
 using Microsoft.EntityFrameworkCore;
 
 namespace House_renting_system_Project

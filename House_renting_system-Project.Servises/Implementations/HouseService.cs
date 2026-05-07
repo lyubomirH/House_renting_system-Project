@@ -4,11 +4,6 @@ using House_renting_system_Project.Servises.House;
 using House_renting_system_Project.Servises.House.Helpers;
 using House_renting_system_Project.Servises.Query;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
 
 namespace House_renting_system_Project.Servises.Implementations
 {

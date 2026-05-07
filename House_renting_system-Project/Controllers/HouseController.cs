@@ -1,12 +1,6 @@
 ﻿using House_renting_system_Project.Data.Data;
-using House_renting_system_Project.Data.Data.Entities;
-//using House_renting_system_Project.Models.House;
-//using House_renting_system_Project.Models.House.Helpers;
-//using House_renting_system_Project.Models.Query;
 using House_renting_system_Project.Servises.Contracts;
 using House_renting_system_Project.Servises.House;
-using House_renting_system_Project.Servises.House.Helpers;
-using House_renting_system_Project.Servises.Implementations;
 using House_renting_system_Project.Servises.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

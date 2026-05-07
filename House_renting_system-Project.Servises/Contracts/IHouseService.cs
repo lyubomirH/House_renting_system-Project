@@ -2,10 +2,6 @@
 using House_renting_system_Project.Servises.House;
 using House_renting_system_Project.Servises.House.Helpers;
 using House_renting_system_Project.Servises.Query;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using static System.Net.WebRequestMethods;
 
 namespace House_renting_system_Project.Servises.Contracts
 {
