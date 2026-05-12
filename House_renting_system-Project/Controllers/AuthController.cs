@@ -85,8 +85,10 @@ namespace House_renting_system_Project.Controllers
             };
 
             var result = await userManager.CreateAsync(newUser, model.Password);
+
             if (result.Succeeded)
             {
+                await userManager.AddToRoleAsync(newUser, model.Role);
                 return RedirectToAction(nameof(Login));
             }
 

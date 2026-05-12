@@ -17,5 +17,7 @@ namespace House_renting_system_Project.Servises.Contracts
 
         Task<List<CategoryViewModel>> GetCategoriesAsync();
         Task<Data.Data.Entities.House> GetHouseByIdAsync(int Id);
+        Task<bool> RentAsync(int id, string userRenterId);
+        Task<bool> LeaveAsync(int id, string userRenterId);
     }
 }

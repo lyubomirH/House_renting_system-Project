@@ -238,5 +238,35 @@ namespace House_renting_system_Project.Servises.Implementations
             }
         }
 
+        public async Task<bool> RentAsync(int id, string userRenterId)
+        {
+            var house = await context.Houses.FirstOrDefaultAsync(h => h.Id == id);
+
+            if (house is null || house.RenterId is not null)
+            {
+                return false;
+            }
+
+            house.RenterId = userRenterId;
+            await context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> LeaveAsync(int id, string userRenterId)
+        {
+            var house = await context.Houses.FirstOrDefaultAsync(h => h.Id == id);
+
+            if (house is null || house.RenterId is null)
+            {
+                return false;
+            }
+
+            house.RenterId = null;
+            await context.SaveChangesAsync();
+
+            return true;
+        }
+        
     }
 }

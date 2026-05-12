@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using House_renting_system_Project.Extentions;
 
 namespace House_renting_system_Project.Controllers
 {
@@ -47,7 +48,7 @@ namespace House_renting_system_Project.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = RoleNames.Agent)]
         public async Task<IActionResult> CreateHouse()
         {
             var houseForm = await houseService.GetCreateHouseFormAsync();
@@ -55,7 +56,7 @@ namespace House_renting_system_Project.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = RoleNames.Agent)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateHouse(HouseFormViewModel model)
         { 
@@ -92,7 +93,7 @@ namespace House_renting_system_Project.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = RoleNames.Agent)]
         public async Task<IActionResult> MyHouses()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -104,7 +105,7 @@ namespace House_renting_system_Project.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = RoleNames.Agent)]
         public async Task<IActionResult> Edit(int id)
         {
             var house = houseService.GetHouseByIdAsync(id);
@@ -131,7 +132,7 @@ namespace House_renting_system_Project.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = RoleNames.Agent)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(HouseFormViewModel model)
         {
@@ -164,12 +165,42 @@ namespace House_renting_system_Project.Controllers
             return RedirectToAction(nameof(MyHouses));
         }
 
-        [Authorize]
+        [Authorize(Roles = RoleNames.Agent)]
         public async Task<IActionResult> Delete(int id)
         {
             var delite = await houseService.DeleteHouseAsync(id);
             return RedirectToAction(nameof(MyHouses));
         }
 
+        [Authorize(Roles = RoleNames.Client)]
+        public async Task<IActionResult> Rent(int id)
+        {
+            var currentUserId = this.User.GetId();
+            if (string.IsNullOrWhiteSpace(currentUserId))
+            {
+                return this.Unauthorized();
+            }
+            var succes = await houseService.RentAsync(id, currentUserId);
+            if (succes)
+            {
+                return this.RedirectToAction(nameof(this.AllHouses));
+            }
+            return this.Unauthorized();
+        }
+        [Authorize(Roles = RoleNames.Client)]
+        public async Task<IActionResult> Leave(int id)
+        {
+            var currentUserId = this.User.GetId();
+            if (string.IsNullOrWhiteSpace(currentUserId))
+            {
+                return this.Unauthorized();
+            }
+            var succes = await houseService.LeaveAsync(id, currentUserId);
+            if (succes)
+            {
+                return this.RedirectToAction(nameof(this.AllHouses));
+            }
+            return this.Unauthorized();
+        }
     }
 }
