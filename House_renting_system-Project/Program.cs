@@ -1,5 +1,6 @@
 using House_renting_system_Project.Data.Data;
 using House_renting_system_Project.Data.Data.Entities;
+using House_renting_system_Project.Extentions;
 using House_renting_system_Project.Servises.Contracts;
 using House_renting_system_Project.Servises.Implementations;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +10,7 @@ namespace House_renting_system_Project
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             
@@ -43,7 +44,14 @@ namespace House_renting_system_Project
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
-            //app.UseTimer();
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<HouseRentingDbContext>();
+                await db.Database.MigrateAsync();
+            }
+            await app.SeedRoles();
+            await app.SeedHouses();
+                //app.UseTimer();
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/ServerError");
@@ -80,6 +88,6 @@ namespace House_renting_system_Project
                 .WithStaticAssets();
 
             app.Run();
-        }
+        }        
     }
 }
