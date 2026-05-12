@@ -56,7 +56,9 @@ namespace House_renting_system_Project.Servises.Implementations
                     Name = h.Title,
                     Address = h.Address,
                     ImageUrl = h.ImageUrl,
-                    CurentUserIsOwner = h.AgentId == currentUsersId
+                    CurentUserIsOwner = h.AgentId == currentUsersId,
+                    CurrentUserIsRenter = h.RenterId == currentUsersId,
+                    IsRented = h.RenterId != null
                 })
                 .ToListAsync();
 
@@ -74,7 +76,7 @@ namespace House_renting_system_Project.Servises.Implementations
 
             return allHouseViewModel;
         }
-        public async Task<HouseDitailViewModel> GetDitailAsync(int Id)
+        public async Task<HouseDitailViewModel> GetDitailAsync(int Id, string userId)
         {
             var searched = await context.Houses
                 .Include(h => h.Agent)
@@ -131,7 +133,9 @@ namespace House_renting_system_Project.Servises.Implementations
                     ImageUrl = h.ImageUrl,
                     Name = h.Title,
                     Id = h.Id,
-                    CurentUserIsOwner = true
+                    CurentUserIsOwner = true,
+                    CurrentUserIsRenter  = h.RenterId == userId,
+                    IsRented = h.RenterId != null
                 })
                 .ToListAsync();
 

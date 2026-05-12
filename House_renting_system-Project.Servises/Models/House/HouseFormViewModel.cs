@@ -32,5 +32,6 @@ namespace House_renting_system_Project.Servises.House
 
         [Required(ErrorMessage = "Please select a category")]
         public int SelectedCategoryId { get; set; }
+        
     }
 }

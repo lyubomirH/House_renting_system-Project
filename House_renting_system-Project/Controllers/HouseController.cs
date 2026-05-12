@@ -36,7 +36,7 @@ namespace House_renting_system_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int Id)
         {
-            var model = await houseService.GetDitailAsync(Id);
+            var model = await houseService.GetDitailAsync(Id, this.User.GetId());
             if (model == null)
             {
                 return RedirectToAction("Error404", "Home");
